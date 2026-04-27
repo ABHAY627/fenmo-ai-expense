@@ -1,5 +1,6 @@
 import { useRef, useState, type FormEvent } from "react";
 import { v4 as uuid } from "uuid";
+import { IndianRupee, Tag, Calendar, PenLine, Plus } from "lucide-react";
 import {
   CATEGORIES,
   CreateExpenseFormSchema,
@@ -91,15 +92,19 @@ export function ExpenseForm() {
       <div className="row">
         <label className="field">
           <span>Amount (₹)</span>
-          <input
-            type="text"
+          <div className="input-wrapper">
+            <IndianRupee className="input-icon" size={18} />
+            <input
+              className="has-icon"
+              type="text"
             inputMode="decimal"
             placeholder="0.00"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
             disabled={pending}
             aria-invalid={!!fieldErrors.amount}
-          />
+            />
+          </div>
           {fieldErrors.amount && (
             <span className="err">{fieldErrors.amount}</span>
           )}
@@ -107,9 +112,12 @@ export function ExpenseForm() {
 
         <label className="field">
           <span>Category</span>
-          <select
-            value={category}
-            onChange={(e) => setCategory(e.target.value as Category | "")}
+          <div className="input-wrapper">
+            <Tag className="input-icon" size={18} />
+            <select
+              className="has-icon"
+              value={category}
+              onChange={(e) => setCategory(e.target.value as Category | "")}
             disabled={pending}
             aria-invalid={!!fieldErrors.category}
           >
@@ -119,7 +127,8 @@ export function ExpenseForm() {
                 {c}
               </option>
             ))}
-          </select>
+            </select>
+          </div>
           {fieldErrors.category && (
             <span className="err">{fieldErrors.category}</span>
           )}
@@ -127,27 +136,35 @@ export function ExpenseForm() {
 
         <label className="field">
           <span>Date</span>
-          <input
-            type="date"
-            value={date}
+          <div className="input-wrapper">
+            <Calendar className="input-icon" size={18} />
+            <input
+              className="has-icon"
+              type="date"
+              value={date}
             onChange={(e) => setDate(e.target.value)}
             disabled={pending}
             aria-invalid={!!fieldErrors.date}
-          />
+            />
+          </div>
           {fieldErrors.date && <span className="err">{fieldErrors.date}</span>}
         </label>
       </div>
 
       <label className="field">
         <span>Description</span>
-        <input
-          type="text"
-          placeholder="what was it for?"
+        <div className="input-wrapper">
+          <PenLine className="input-icon" size={18} />
+          <input
+            className="has-icon"
+            type="text"
+            placeholder="What was it for?"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           disabled={pending}
           maxLength={500}
-        />
+          />
+        </div>
         {fieldErrors.description && (
           <span className="err">{fieldErrors.description}</span>
         )}
@@ -157,7 +174,11 @@ export function ExpenseForm() {
 
       <div className="actions">
         <button type="submit" className="btn primary" disabled={pending}>
-          {pending ? "saving…" : "add expense"}
+          {pending ? "Saving..." : (
+            <>
+              <Plus size={18} /> Add Expense
+            </>
+          )}
         </button>
       </div>
     </form>

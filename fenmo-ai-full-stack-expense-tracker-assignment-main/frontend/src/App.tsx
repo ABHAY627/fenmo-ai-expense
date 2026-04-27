@@ -47,9 +47,9 @@ export default function App() {
   return (
     <div className="container">
       <header className="header">
-        <h1>Expense Tracker</h1>
+        <h1>Expense Tracker Pro</h1>
         <p className="muted">
-          small personal-finance tool. all amounts in rupees.
+          Your personal God-level local finance dashboard. All amounts in Rupee.
         </p>
       </header>
 
